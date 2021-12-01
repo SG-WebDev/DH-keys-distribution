@@ -1,0 +1,19 @@
+{
+  "name": "dh-keys-distribution-app",
+  "version": "1.0.0",
+  "description": "Simple web chat implementation with crypted messages and Diffie Hellman keys distribution",
+  "main": "index.js",
+  "scripts": {
+    "test": "-"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SG-WebDev/DH-keys-distribution.git"
+  },
+  "author": "SG-WebDev",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SG-WebDev/DH-keys-distribution/issues"
+  },
+  "homepage": "https://github.com/SG-WebDev/DH-keys-distribution#readme"
+}

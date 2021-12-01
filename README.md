@@ -17,10 +17,10 @@ Prosty chat webowy z szyfrowaniem wiadomości z dystrybucją kluczy opartą o al
 
 #### Szymon Grobelny
 
-- [ ] Inicjacja projektu klienta
-- [ ] HTML aplikacji klienckiej
-- [ ] Wygląd ekranów aplikacji (startowy i chat)
-- [ ] Obsługa Web Socketów w aplikacji
+- [x] Inicjacja projektu klienta
+- [ ] Projekt interfejsu
+- [ ] Struktura i wygląd ekranów aplikacji
+- [ ] Obsługa chatu w aplikacji
 
 #### Cezary Szpotek
 
