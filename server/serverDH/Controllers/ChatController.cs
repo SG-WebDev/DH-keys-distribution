@@ -29,11 +29,7 @@ namespace serverDH.Controllers
         [HttpPost]
         public ActionResult SendMessage(MessageDto messagedto)
         {
-            var result = messageRepo.AddMess(messagedto);
-
-            if (result) { return Ok(); }
-
-            return NotFound();
+            return Ok();
         }
     }
 }
