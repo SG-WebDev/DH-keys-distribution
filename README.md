@@ -5,8 +5,8 @@ Prosty chat webowy z szyfrowaniem wiadomości z dystrybucją kluczy opartą o al
 
 #### Dorota Skowronek
 
-- [ ] Inicjacja projektu serwera
-- [ ] Stworzenie Hub'a Web Socketów na serwerze
+- [x] Inicjacja projektu serwera
+- [x] Stworzenie Hub'a Web Socketów na serwerze
 - [ ] Obsługa chatu real-time - serwer
 
 #### Szymon Biskup
@@ -18,7 +18,7 @@ Prosty chat webowy z szyfrowaniem wiadomości z dystrybucją kluczy opartą o al
 #### Szymon Grobelny
 
 - [x] Inicjacja projektu klienta
-- [ ] Projekt interfejsu
+- [x] Projekt interfejsu
 - [ ] Struktura i wygląd ekranów aplikacji
 - [ ] Obsługa chatu w aplikacji
 
