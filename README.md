@@ -34,19 +34,19 @@ Prosty chat webowy z szyfrowaniem wiadomości z dystrybucją kluczy opartą o al
 
 ## Problematyka problemu
 
-#### Opis
+### Opis
 
-#### Znane rozwiązanie
+### Znane rozwiązanie
 
-#### Algorytmy
+### Algorytmy
 
-#### Źródła
+### Źródła
 
 ## Założenia projektowe
 
-#### Wybór rozwiązania
+### Wybór rozwiązania
 
-#### Alternatywne rozwiązania
+### Alternatywne rozwiązania
 
 ## Wybrane technologie
 
