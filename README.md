@@ -53,6 +53,11 @@ Prosty chat webowy z szyfrowaniem wiadomości z dystrybucją kluczy opartą o al
 ## Motywacja wyboru stosu technologicznego
 
 ## Projekt interfejsu
+[Link do makiet](https://www.behance.net/gallery/132467319/Chat-Room)
+
+![UI Desktop](/docs-assets/ui-desktop.jpg "UI Desktop")
+
+![UI Desktop](/docs-assets/style-guide.jpg "Style Guide")
 
 ## Architektura, Algorytm
 
