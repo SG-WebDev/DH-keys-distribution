@@ -3,10 +3,134 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" integrity="sha512-NhSC1YmyruXifcj/KFRWoC561YpHpc5Jtzgvbuzx5VozKpWvQ+4nXhPdFgmx8xqexRcpAglTj9sIBWINXa8x5w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./index.css"/>
     <title>DH Keys Distribution</title>
 </head>
 <body>
-<script src="./index.js"></script>
+    <main class="wrapper">
+        <section class="section section--init">
+            <div class="authInfo">Welcome! <br/> You're logged in.</div>
+            <div class="form">
+                <div class="form__Group">
+                    <label class="label" for="Username">Username</label>
+                    <input class="input" id="Username" type="text" required>
+                </div>
+                <div class="form__Group">
+                    <label class="label" for="Password">Password</label>
+                    <input class="input" id="Password" type="password" required>
+                </div>
+                <div class="form__Group">
+                    <button id="LoginSubmit" class="button" type="button">Login</button>
+                </div>
+            </div>
+        </section>
+        <section class="section">
+            <h1 class="heading">Chat Room</h1>
+            <div class="chat customScrollbar">
+                <div class="message message--other">
+                    <div class="message__Author">Joe Doe</div>
+                    <div class="message__Value">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus id libero condimentum. Portosiroto di libero tuto.
+                    </div>
+                    <div class="message__Time">8:00 AM, 11.12.021</div>
+                </div>
+                <div class="message message--other">
+                    <div class="message__Author">Joe Doe</div>
+                    <div class="message__Value">
+                        Lorem ipsum dolor sit amet.
+                    </div>
+                    <div class="message__Time">8:00 AM, 11.12.021</div>
+                </div>
+                <div class="message message--other">
+                    <div class="message__Author">Joe Doe</div>
+                    <div class="message__Value">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus id libero condimentum. Portosiroto di libero tuto.
+                    </div>
+                    <div class="message__Time">8:00 AM, 11.12.021</div>
+                </div>
+                <div class="message message--other">
+                    <div class="message__Author">Joe Doe</div>
+                    <div class="message__Value">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus id libero condimentum. Portosiroto di libero tuto.
+                    </div>
+                    <div class="message__Time">8:00 AM, 11.12.021</div>
+                </div>
+                <div class="message message--own">
+                    <div class="message__Author">Myself</div>
+                    <div class="message__Value">
+                        Lorem ipsum dolor sit amet.
+                    </div>
+                    <div class="message__Time">8:00 AM, 11.12.021</div>
+                </div>
+                <div class="message message--own">
+                    <div class="message__Author">Myself</div>
+                    <div class="message__Value">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus id libero condimentum.
+                    </div>
+                    <div class="message__Time">8:00 AM, 11.12.021</div>
+                </div>
+                <div class="message message--other">
+                    <div class="message__Author">Joe Doe</div>
+                    <div class="message__Value">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus id libero condimentum. Portosiroto di libero tuto.
+                    </div>
+                    <div class="message__Time">8:00 AM, 11.12.021</div>
+                </div>
+                <div class="message message--other">
+                    <div class="message__Author">Joe Doe</div>
+                    <div class="message__Value">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus id libero condimentum. Portosiroto di libero tuto.
+                    </div>
+                    <div class="message__Time">8:00 AM, 11.12.021</div>
+                </div>
+                <div class="message message--other">
+                    <div class="message__Author">Joe Doe</div>
+                    <div class="message__Value">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus id libero condimentum. Portosiroto di libero tuto.
+                    </div>
+                    <div class="message__Time">8:00 AM, 11.12.021</div>
+                </div>
+                <div class="message message--own">
+                    <div class="message__Author">Myself</div>
+                    <div class="message__Value">
+                        Lorem ipsum dolor sit amet.
+                    </div>
+                    <div class="message__Time">8:00 AM, 11.12.021</div>
+                </div>
+                <div class="message message--own">
+                    <div class="message__Author">Myself</div>
+                    <div class="message__Value">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus id libero condimentum.
+                    </div>
+                    <div class="message__Time">8:00 AM, 11.12.021</div>
+                </div>
+                <div class="message message--own">
+                    <div class="message__Author">Myself</div>
+                    <div class="message__Value">
+                        Lorem ipsum dolor sit amet.
+                    </div>
+                    <div class="message__Time">8:00 AM, 11.12.021</div>
+                </div>
+                <div class="message message--own">
+                    <div class="message__Author">Myself</div>
+                    <div class="message__Value">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus id libero condimentum.
+                    </div>
+                    <div class="message__Time">8:00 AM, 11.12.021</div>
+                </div>
+            </div>
+            <div class="messageSendWrapper">
+                <input id="MessageValue" class="input input--message" type="text" placeholder="Type something ..." required>
+                <button id="MessageSubmit" class="button button--alt" type="button">Send</button>
+            </div>
+        </section>
+    </main>
+    <script src="./js/login.js"></script>
+    <script src="./js/chat.js"></script>
+    <script src="./js/cipher.js"></script>
 </body>
 </html>

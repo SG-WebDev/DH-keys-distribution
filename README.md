@@ -19,7 +19,7 @@ Prosty chat webowy z szyfrowaniem wiadomości z dystrybucją kluczy opartą o al
 
 - [x] Inicjacja projektu klienta
 - [x] Projekt interfejsu
-- [ ] Struktura i wygląd ekranów aplikacji
+- [x] Struktura i wygląd ekranów aplikacji
 - [ ] Obsługa chatu w aplikacji
 
 #### Cezary Szpotek
