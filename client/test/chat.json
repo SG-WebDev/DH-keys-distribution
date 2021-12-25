@@ -1,0 +1,88 @@
+[
+  {
+    "author": "Mario",
+    "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus id libero condimentum. Portosiroto di libero tuto.",
+    "time": "8:02 AM, 11.12.021"
+  },
+  {
+  "author": "Paolo",
+  "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus id libero condimentum. Portosiroto di libero tuto.",
+  "time": "8:04 AM, 11.12.021"
+  },
+  {
+    "author": "Joe Doe",
+    "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus id libero condimentum. Portosiroto di libero tuto.",
+    "time": "8:05 AM, 11.12.021"
+  },
+  {
+    "author": "Joe Doe",
+    "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus id libero condimentum. Portosiroto di libero tuto.",
+    "time": "8:06 AM, 11.12.021"
+  },
+  {
+    "author": "Joe Doe",
+    "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus id libero condimentum. Portosiroto di libero tuto.",
+    "time": "8:07 AM, 11.12.021"
+  },
+  {
+    "author": "Vinceto Belluci",
+    "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus id libero condimentum. Portosiroto di libero tuto.",
+    "time": "8:08 AM, 11.12.021"
+  },
+  {
+    "author": "currentUser",
+    "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus id libero condimentum. Portosiroto di libero tuto.",
+    "time": "8:12 AM, 11.12.021"
+  },
+  {
+    "author": "Amanda",
+    "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus id libero condimentum. Portosiroto di libero tuto.",
+    "time": "8:12 AM, 11.12.021"
+  },
+  {
+    "author": "Travis",
+    "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus id libero condimentum. Portosiroto di libero tuto.",
+    "time": "8:12 AM, 11.12.021"
+  },
+  {
+    "author": "currentUser",
+    "text": "Lorem ipsum dolor sit amet.",
+    "time": "8:16 AM, 11.12.021"
+  },
+  {
+    "author": "Joe Doe",
+    "text": "Lorem ipsum dolor sit amet.",
+    "time": "8:17 AM, 11.12.021"
+  },
+  {
+    "author": "Rodrigo",
+    "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus id libero condimentum. Portosiroto di libero tuto.",
+    "time": "8:22 AM, 11.12.021"
+  },
+  {
+    "author": "currentUser",
+    "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus id libero condimentum. Portosiroto di libero tuto.",
+    "time": "8:22 AM, 11.12.021"
+  },
+  {
+    "author": "Joe Doe",
+    "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus id libero condimentum. Portosiroto di libero tuto.",
+    "time": "8:17 AM, 11.12.021"
+  },
+  {
+    "author": "Amanda",
+    "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus id libero condimentum. Portosiroto di libero tuto.",
+    "time": "8:22 AM, 11.12.021"
+  },
+  {
+    "author": "Joe Doe",
+    "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    "time": "8:17 AM, 11.12.021"
+  },
+  {
+    "author": "currentUser",
+    "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus id libero condimentum. Portosiroto di libero tuto.",
+    "time": "8:22 AM, 11.12.021"
+  }
+]
+
