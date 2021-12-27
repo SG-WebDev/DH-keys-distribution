@@ -19,6 +19,16 @@ namespace serverDH.Controllers
             _userManager = userManager;
             _signInManager = signInManager;
         }
+        [HttpGet]
+        [Route("getCurrentUser")]
+        public async Task<IActionResult> GetCurrentUser()
+        {
+           var user = await _userManager.GetUserAsync(User);
+            if (user == null) return Unauthorized();
+
+            return Ok(user);
+        
+
         [HttpPost]
         [Route("login")]
         public async Task<IActionResult> Login([FromBody] UserLoginDto userLoginDto)
