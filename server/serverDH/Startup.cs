@@ -1,8 +1,11 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using SecretChat.Entities;
+using System;
 
 namespace serverDH
 {
@@ -18,6 +21,9 @@ namespace serverDH
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddSignalR();
+            services.AddAutoMapper(this.GetType().Assembly);
+            services.AddDbContext<AppDbContext>(x =>
+                x.UseSqlServer(Configuration.GetConnectionString("Default")));
 
             services.AddCors(options =>
             {
@@ -28,10 +34,11 @@ namespace serverDH
                .WithOrigins(Configuration["AllowedOrigins"]));
             });
 
+            
             services.AddControllers();
         }
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IServiceProvider serviceProvider)
         {
             if (env.IsDevelopment())
             {
@@ -58,6 +65,8 @@ namespace serverDH
                     pattern: "{controller}/{action=Index}/{id?}");
                 endpoints.MapHub<MessageHubClient>("/message");
             });
+            serviceProvider.GetRequiredService<AppDbContext>().Database.EnsureCreated();
         }
+         
     }
 }
