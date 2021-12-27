@@ -5,10 +5,10 @@ namespace serverDH.Entities
     public class Message
     {
         public int messageId { get; set; }
-        public DateTime When { get; set; }
-        public string Content { get; set; }
-        public string UserId { get; set; }
+        public DateTime date { get; set; }
+        public string message { get; set; }
+        public string UserID { get; set; }
 
-        public virtual User user { get; set; }
+        public virtual User User { get; set; }
     }
 }

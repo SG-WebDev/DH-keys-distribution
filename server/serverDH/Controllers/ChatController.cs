@@ -31,7 +31,7 @@ namespace serverDH.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<MessageDto>> GetAll()
         {
-            var result = _dbContext.message.Include(x => x.user).ToList().OrderBy(messtime => messtime.When);
+            var result = _dbContext.message.Include(x => x.User).ToList().OrderBy(messtime => messtime.date);
             var resultdto = _mapper.Map<List<MessageDto>>(result);
 
             return Ok(resultdto);

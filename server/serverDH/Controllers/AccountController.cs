@@ -27,8 +27,9 @@ namespace serverDH.Controllers
             if (user == null) return Unauthorized();
 
             return Ok(user);
+         }
         
-
+ 
         [HttpPost]
         [Route("login")]
         public async Task<IActionResult> Login([FromBody] UserLoginDto userLoginDto)
