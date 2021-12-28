@@ -40,7 +40,7 @@ namespace serverDH.Controllers
 
 
         [HttpPost]
-        public ActionResult SendMessage(MessageDto messagedto)
+        public ActionResult SendMessage(NewMessageDto messagedto)
         {
             var result = _mapper.Map<Message>(messagedto);
             if (result == null) { return BadRequest("Message can not be NULL!!"); }
