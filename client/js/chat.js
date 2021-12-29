@@ -2,7 +2,6 @@ const messageInput = document.querySelector("#MessageValue");
 const messageButton = document.querySelector("#MessageSubmit");
 const chatView = document.querySelector("#Chat");
 
-// TO DO Handle API
 function getChat() {
     const currentUsername = localStorage.getItem("username");
     fetch('https://localhost:44310/api/chat', {

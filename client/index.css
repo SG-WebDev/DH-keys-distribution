@@ -40,8 +40,6 @@ body {
 .authInfo {
     z-index: -1;
     opacity: 0;
-    font-size: 2em;
-    font-weight: 300;
     text-align: center;
     margin-top: -75px;
     transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
@@ -52,6 +50,11 @@ body {
     opacity: 1;
     transform-origin: bottom;
     transform: translateY(100%);
+}
+
+.authInfo__Text {
+    font-size: 2em;
+    font-weight: 300;
 }
 
 .form {

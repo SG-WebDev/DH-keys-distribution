@@ -5,7 +5,6 @@ const logoutButton = document.querySelector("#LogoutSubmit");
 const loginFrom = document.querySelector(".form");
 const authInfo = document.querySelector(".authInfo");
 
-// TO DO handle API
 function auth(username, pass) {
     const authData = {
         UserName: username,
@@ -17,17 +16,18 @@ function auth(username, pass) {
         headers: {
             "Content-Type": "application/json",
         },
-        credentials: "include",
-        body: authData
+        mode: 'cors',
+        credentials: 'include',
+        body: JSON.stringify(authData)
     })
         .then(response => response)
         .then(data => {
             console.log(data);
-            // localStorage.setItem('userID', data.userID);
-            // localStorage.setItem('username', data.username);
-            // authInfo.style.zIndex = "1";
-            // loginFrom.classList.add("form--hide");
-            // authInfo.classList.add("authInfo--show");
+            if (data.ok) {
+                login();
+            } else {
+                alert("Login failed")
+            }
         })
         .catch((error) => {
             console.error("Error:", error);
@@ -37,20 +37,22 @@ function auth(username, pass) {
 
 function login() {
     fetch('https://localhost:44310/api/account/getCurrentUser', {
-        method: 'GET'
+        method: 'GET',
+        mode: 'cors',
+        credentials: 'include'
     })
-        .then(response => response.json())
+        .then(response => response)
         .then(data => {
             console.log(data);
-            localStorage.setItem('userID', data.userID);
-            localStorage.setItem('username', data.username);
+            localStorage.setItem('username', data.userName);
+            localStorage.setItem('userID', data.id);
             authInfo.style.zIndex = "1";
             loginFrom.classList.add("form--hide");
             authInfo.classList.add("authInfo--show");
         })
         .catch((error) => {
             console.error("Error:", error);
-            alert("Authentication failed!")
+            alert("Current User failed!")
         });
 }
 
@@ -65,13 +67,14 @@ function logout() {
             console.log(data);
             localStorage.removeItem("userID");
             localStorage.removeItem("username");
+            authInfo.style.zIndex = "-1";
+            loginFrom.classList.remove("form--hide");
+            authInfo.classList.remove("authInfo--show");
         })
         .catch((error) => {
             console.error("Error:", error);
         });
 }
-
-
 
 
 loginButton.addEventListener("click", function () {
