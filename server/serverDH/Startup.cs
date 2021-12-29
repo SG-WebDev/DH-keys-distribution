@@ -37,8 +37,8 @@ namespace serverDH
                 options.AddPolicy("FrontendClient", builder =>
                   builder.AllowAnyMethod()
                   .AllowAnyHeader()
-                  .AllowCredentials()
-                  .AllowAnyOrigin());
+                  .SetIsOriginAllowed(origin => true)
+                  .AllowCredentials());
             });
 
             
