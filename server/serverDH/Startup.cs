@@ -30,7 +30,12 @@ namespace serverDH
                .EnableSensitiveDataLogging()
                .EnableDetailedErrors());
 
-
+            services.AddIdentity<User, IdentityRole>(config =>
+            {
+                config.SignIn.RequireConfirmedEmail = false;
+                config.User.RequireUniqueEmail = false;
+            }).AddEntityFrameworkStores<AppDbContext>()
+               .AddDefaultTokenProviders();
 
             services.AddCors(options =>
             {
