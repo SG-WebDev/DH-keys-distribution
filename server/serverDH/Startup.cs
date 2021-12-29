@@ -37,6 +37,12 @@ namespace serverDH
             }).AddEntityFrameworkStores<AppDbContext>()
                .AddDefaultTokenProviders();
 
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.Cookie.Name = "UserLoginCookie";
+                options.SlidingExpiration = true;
+            });
+
             services.AddCors(options =>
             {
                 options.AddPolicy("FrontendClient", builder =>
