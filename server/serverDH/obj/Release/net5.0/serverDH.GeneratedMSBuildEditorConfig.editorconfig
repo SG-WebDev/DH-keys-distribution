@@ -7,4 +7,4 @@ build_property.PublishSingleFile =
 build_property.IncludeAllContentForSelfExtract = 
 build_property._SupportedPlatformList = Android,iOS,Linux,macOS,Windows
 build_property.RootNamespace = serverDH
-build_property.ProjectDir = c:\users\dorota\source\repos\dh-keys-distribution\server\serverDH\
+build_property.ProjectDir = C:\Users\Dorota\Source\Repos\DH-keys-distribution\server\serverDH\

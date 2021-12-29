@@ -24,8 +24,12 @@ namespace serverDH
         {
             services.AddSignalR();
             services.AddAutoMapper(this.GetType().Assembly);
+            var version = new MySqlServerVersion(new Version(5, 5, 5));
             services.AddDbContext<AppDbContext>(x =>
-                x.UseSqlServer(Configuration.GetConnectionString("Default")));
+               x.UseMySql(Configuration.GetConnectionString("Default"), version)
+               .EnableSensitiveDataLogging()
+               .EnableDetailedErrors());
+
 
 
             services.AddCors(options =>
