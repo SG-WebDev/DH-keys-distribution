@@ -11,28 +11,57 @@ function getChat() {
         .then(response => response.json())
         .then(data => {
             console.log(data);
-            // data.forEach(message => {
-            //     let messageClass;
-            //     if (message.author === currentUsername) {
-            //         messageClass = "message message--own";
-            //     } else {
-            //         messageClass = "message message--other";
-            //     }
-            //     let messageHTML =
-            //         `<div class="${messageClass}">
-            //         <div class="message__Author">${message.author}</div>
-            //         <div class="message__Value">${message.text}</div>
-            //         <div class="message__Time">${message.time}</div>
-            //     </div>`;
-            //     chatView.insertAdjacentHTML("beforeend", messageHTML);
-            // })
+            data.forEach(message => {
+                let messageClass;
+                if (message.userName === currentUsername) {
+                    messageClass = "message message--own";
+                } else {
+                    messageClass = "message message--other";
+                }
+                let messageHTML =
+                    `<div class="${messageClass}">
+                    <div class="message__Author">${message.userName}</div>
+                    <div class="message__Value">${message.message}</div>
+                    <div class="message__Time">${message.date}</div>
+                </div>`;
+                chatView.insertAdjacentHTML("beforeend", messageHTML);
+                chatView.scrollTop = chatView.scrollHeight;
+            })
         });
+
 }
 
 messageButton.addEventListener("click", function() {
     let messageValue = messageInput.value;
-    console.log(messageValue);
-    chatView.scrollTop = chatView.scrollHeight;
+    const messageData = {
+        UserID: localStorage.getItem('userID'),
+        message: messageValue
+    };
+    console.log(messageData);
+    if(messageValue) {
+        fetch('https://localhost:44310/api/chat', {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(messageData)
+        })
+            .then(response => response)
+            .then(data => {
+                console.log(data);
+                while (chatView.firstChild) {
+                    chatView.removeChild(chatView.firstChild);
+                }
+                getChat();
+            })
+            .catch((error) => {
+                console.error("Error:", error);
+                alert("Something went wrong!")
+            });
+    } else {
+        alert("Write a message first!")
+    }
+
 });
 
 getChat();
