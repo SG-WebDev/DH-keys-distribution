@@ -20,12 +20,15 @@ function auth(username, pass) {
         credentials: 'include',
         body: JSON.stringify(authData)
     })
-        .then(response => response)
+        .then(response => response.json())
         .then(data => {
             console.log(data);
-            if (data.ok) {
-                login();
-                localStorage.setItem('username', username);
+            if (data.userName && data.id) {
+                localStorage.setItem('userID', data.id);
+                localStorage.setItem('username', data.userName);
+                authInfo.style.zIndex = "1";
+                loginFrom.classList.add("form--hide");
+                authInfo.classList.add("authInfo--show");
                 getChat();
             } else {
                 alert("Login failed")
@@ -34,29 +37,6 @@ function auth(username, pass) {
         .catch((error) => {
             console.error("Error:", error);
             alert("Authentication failed!")
-        });
-}
-
-function login() {
-    fetch('https://localhost:44310/api/account/getCurrentUser', {
-        method: 'GET',
-        headers: {
-            "Content-Type": "application/json",
-        },
-        mode: "cors",
-        credentials: 'include'
-    })
-        .then(response => response.json())
-        .then(data => {
-            console.log(data);
-            localStorage.setItem('userID', data.id);
-            authInfo.style.zIndex = "1";
-            loginFrom.classList.add("form--hide");
-            authInfo.classList.add("authInfo--show");
-        })
-        .catch((error) => {
-            console.error("Error:", error);
-            alert("Current User failed!")
         });
 }
 

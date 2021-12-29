@@ -39,7 +39,9 @@ namespace serverDH.Controllers
 
 
             var result = await _signInManager.PasswordSignInAsync(findUser, userLoginDto.Password, false, true);
-            if (result.Succeeded) {return Ok("Login");}
+
+            if (result.Succeeded) {return Ok(findUser);}
+
 
             return NotFound("Your password is not correct");
 
