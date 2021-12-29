@@ -38,7 +38,7 @@ namespace serverDH
                   builder.AllowAnyMethod()
                   .AllowAnyHeader()
                   .AllowCredentials()
-               .WithOrigins(Configuration["AllowedOrigins"]));
+                  .AllowAnyOrigin());
             });
 
             
