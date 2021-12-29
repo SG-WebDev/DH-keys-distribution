@@ -25,6 +25,8 @@ function auth(username, pass) {
             console.log(data);
             if (data.ok) {
                 login();
+                localStorage.setItem('username', username);
+                getChat();
             } else {
                 alert("Login failed")
             }
@@ -38,13 +40,15 @@ function auth(username, pass) {
 function login() {
     fetch('https://localhost:44310/api/account/getCurrentUser', {
         method: 'GET',
-        mode: 'cors',
+        headers: {
+            "Content-Type": "application/json",
+        },
+        mode: "cors",
         credentials: 'include'
     })
-        .then(response => response)
+        .then(response => response.json())
         .then(data => {
             console.log(data);
-            localStorage.setItem('username', data.userName);
             localStorage.setItem('userID', data.id);
             authInfo.style.zIndex = "1";
             loginFrom.classList.add("form--hide");

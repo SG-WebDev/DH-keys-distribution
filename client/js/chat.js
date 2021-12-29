@@ -10,6 +10,9 @@ function getChat() {
         .then(response => response.json())
         .then(data => {
             console.log(data);
+            while (chatView.firstChild) {
+                chatView.removeChild(chatView.firstChild);
+            }
             data.forEach(message => {
                 let messageClass;
                 if (message.userName === currentUsername) {
@@ -48,9 +51,6 @@ messageButton.addEventListener("click", function() {
             .then(response => response)
             .then(data => {
                 console.log(data);
-                while (chatView.firstChild) {
-                    chatView.removeChild(chatView.firstChild);
-                }
                 getChat();
             })
             .catch((error) => {
