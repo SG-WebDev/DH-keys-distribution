@@ -70,7 +70,7 @@ var usr2Decipher = crypto.createDecipher(AES256, usr2Secret);
 //var usr3Cipher = crypto.createCipher(AES256, usr3Secret);
 var usr3Decipher = crypto.createDecipher(AES256, usr3Secret);
 
-var message1 = "Wspólna wiadomoœæ od usera 1 do wszystkich";
+var message1 = "Wspï¿½lna wiadomoï¿½ï¿½ od usera 1 do wszystkich";
 var encr_message1 = usr1Cipher.update(message1, "utf8", "hex");
 encr_message1 += usr1Cipher.final("hex");
 console.log("User1 says (clear): " + message1);
