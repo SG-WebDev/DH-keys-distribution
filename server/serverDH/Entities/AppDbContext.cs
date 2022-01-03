@@ -1,10 +1,9 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using serverDH.Entities;
 using System;
 
-namespace SecretChat.Entities
+namespace serverDH.Entities
 {
     public class AppDbContext : IdentityDbContext<User>
     {

@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using SecretChat.Entities;
 using serverDH.Dtos;
 using serverDH.Entities;
 using System.Threading.Tasks;
@@ -18,7 +17,7 @@ namespace serverDH.Controllers
         private readonly IMapper _mapper;
 
 
-        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager)
+        public AccountController(AppDbContext dbContext, IMapper mapper, UserManager<User> userManager, SignInManager<User> signInManager)
         {
             _dbContext = dbContext;
             _userManager = userManager;
