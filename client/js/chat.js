@@ -1,3 +1,5 @@
+const signalR = require("@microsoft/signalr");
+
 const messageInput = document.querySelector("#MessageValue");
 const messageButton = document.querySelector("#MessageSubmit");
 const chatView = document.querySelector("#Chat");
@@ -51,7 +53,7 @@ messageButton.addEventListener("click", function() {
             .then(response => response)
             .then(data => {
                 console.log(data);
-                getChat();
+
             })
             .catch((error) => {
                 console.error("Error:", error);
@@ -63,4 +65,17 @@ messageButton.addEventListener("click", function() {
 
 });
 
+function syncChat() {
+    let connection = new signalR.HubConnectionBuilder()
+        .configureLogging(signalR.LogLevel.Information)
+        .withUrl("https://localhost:44310/message")
+        .build();
+
+    connection.start();
+    connection.on("NewMessage", () => {
+        getChat();
+    });
+}
+
 getChat();
+syncChat();
