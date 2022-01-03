@@ -9,6 +9,7 @@ namespace SecretChat.Entities
     public class AppDbContext : IdentityDbContext<User>
     {
         public DbSet<Message> message { get; set; }
+        public DbSet<User> user { get; set; }
 
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {

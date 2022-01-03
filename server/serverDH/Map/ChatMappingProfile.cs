@@ -18,6 +18,9 @@ namespace serverDH.Map
                 .ForMember(e => e.UserID, c => c.MapFrom(g => g.UserID))
                 .ForMember(e => e.date, c => c.MapFrom(g => g.date))
                 .ForMember(e => e.message, c => c.MapFrom(g => g.message));
+
+            CreateMap<UserLoginDto, User>()
+                .ForMember(g => g.PublicKey, e => e.MapFrom(w => w.PublicKey));
         }
     }
 }
