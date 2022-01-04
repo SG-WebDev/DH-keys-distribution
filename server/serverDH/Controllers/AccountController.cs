@@ -1,8 +1,10 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using MySqlConnector;
 using serverDH.Dtos;
 using serverDH.Entities;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace serverDH.Controllers
@@ -33,9 +35,10 @@ namespace serverDH.Controllers
             var findUser = await _userManager.FindByNameAsync(userLoginDto.UserName);
             if (findUser == null) { return NotFound("User doesn't exist"); }
 
-            var pkey = _mapper.Map<User>(userLoginDto.PublicKey);
-            _dbContext.user.Add(pkey);
-            _dbContext.SaveChanges();
+
+            findUser.PublicKey = userLoginDto.PublicKey;
+
+            await _userManager.UpdateAsync(findUser);
 
 
             var result = await _signInManager.PasswordSignInAsync(findUser, userLoginDto.Password, false, true);
