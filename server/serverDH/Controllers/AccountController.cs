@@ -1,10 +1,11 @@
-﻿using AutoMapper;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using MySqlConnector;
 using serverDH.Dtos;
 using serverDH.Entities;
-using System.Linq;
+using serverDH.Interfaces;
+using serverDH.Services;
+using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace serverDH.Controllers
@@ -15,18 +16,15 @@ namespace serverDH.Controllers
     {
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
-        private readonly AppDbContext _dbContext;
-        private readonly IMapper _mapper;
+        private readonly ISecretKey _secretKey;
+        public List<UserLoginDto> kk = new List<UserLoginDto>();
 
-
-        public AccountController(AppDbContext dbContext, IMapper mapper, UserManager<User> userManager, SignInManager<User> signInManager)
+        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager, ISecretKey secretKey)
         {
-            _dbContext = dbContext;
-            _userManager = userManager;
             _signInManager = signInManager;
-            _mapper = mapper;
+            _userManager = userManager;
+            _secretKey = secretKey;
         }
-
 
         [HttpPost]
         [Route("login")]
@@ -34,21 +32,25 @@ namespace serverDH.Controllers
         {
             var findUser = await _userManager.FindByNameAsync(userLoginDto.UserName);
             if (findUser == null) { return NotFound("User doesn't exist"); }
-
-
             findUser.PublicKey = userLoginDto.PublicKey;
-
-            await _userManager.UpdateAsync(findUser);
-
-
+            if (userLoginDto.PublicKey == null) { userLoginDto.PublicKey = "lihjaldwihashdalsd"; await _userManager.UpdateAsync(findUser); }
+            else { await _userManager.UpdateAsync(findUser); }
             var result = await _signInManager.PasswordSignInAsync(findUser, userLoginDto.Password, false, true);
-
-            if (result.Succeeded) {return Ok(findUser);}
-
-
+            if (result.Succeeded) {
+                kk.Add(new UserLoginDto() { UserName = userLoginDto.UserName, PublicKey = userLoginDto.PublicKey });
+                foreach (UserLoginDto a in kk)
+                {
+                    Console.WriteLine(a.UserName);
+                }
+               // _secretKey.AddUserList(userLoginDto.UserName, userLoginDto.PublicKey);
+                //_secretKey.LengthUserList();
+                //_secretKey.GetAllList();
+                return Ok(findUser);
+            }
             return NotFound("Your password is not correct");
-
         }
+
+
 
         [HttpGet]
         [Route("logout")]

@@ -8,6 +8,7 @@ namespace serverDH.Entities
         public DateTime date { get; set; }
         public string message { get; set; }
         public string UserID { get; set; }
+        public string UserName { get; set; }
 
         public virtual User User { get; set; }
     }

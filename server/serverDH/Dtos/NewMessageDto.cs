@@ -6,6 +6,7 @@ namespace serverDH.Dtos
     {
         public string UserID { get; set; }
         public string message { get; set; }
+        public string username { get; set; }
         public DateTime date { get; set; } = DateTime.Now;
     }
 }
