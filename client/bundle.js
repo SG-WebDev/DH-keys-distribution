@@ -44,7 +44,9 @@ function getChat() {
 messageButton.addEventListener("click", function() {
     let messageValue = messageInput.value;
     const messageData = {
-        UserID: localStorage.getItem('userID'),
+        //UserID: localStorage.getItem('userID'),
+        UserID: "4dd91c6a-17c9-4dc7-aaaf-5ca42c1cb04c",
+        UserName: localStorage.getItem('username'),
         message: messageValue
     };
     console.log(messageData);
@@ -186,68 +188,73 @@ const loginButton = document.querySelector("#LoginSubmit");
 const logoutButton = document.querySelector("#LogoutSubmit");
 const loginFrom = document.querySelector(".form");
 const authInfo = document.querySelector(".authInfo");
+const chatWrapper = document.querySelector("#ChatWrapper");
 
+const users = [
+    {
+        userID: 1,
+        username: "Joe",
+        password: "test1234",
+        privateKey: "testPrivateKey",
+        publicKey: "testPublicKey",
+    },
+    {
+        userID: 2,
+        username: "Doris",
+        password: "test1234",
+        privateKey: "testPrivateKey",
+        publicKey: "testPublicKey",
+    },
+    {
+        userID: 3,
+        username: "Bob",
+        password: "test1234",
+        privateKey: "testPrivateKey",
+        publicKey: "testPublicKey",
+    },
+    {
+        userID: 4,
+        username: "Travis",
+        password: "test1234",
+        privateKey: "testPrivateKey",
+        publicKey: "testPublicKey",
+    },
+];
+
+console.log(users);
 function auth(username, pass) {
-    const authData = {
-        UserName: username,
-        Password: pass
-    };
-    console.log(authData)
-    fetch('https://localhost:44310/api/account/login', {
-        method: 'POST',
-        headers: {
-            "Content-Type": "application/json",
-        },
-        mode: 'cors',
-        credentials: 'include',
-        body: JSON.stringify(authData)
-    })
-        .then(response => response.json())
-        .then(data => {
-            console.log(data);
-            if (data.userName && data.id) {
-                localStorage.setItem('userID', data.id);
-                localStorage.setItem('username', data.userName);
-                authInfo.style.zIndex = "1";
-                loginFrom.classList.add("form--hide");
-                authInfo.classList.add("authInfo--show");
-                getChat();
-            } else {
-                alert("Login failed")
-            }
-        })
-        .catch((error) => {
-            console.error("Error:", error);
-            alert("Authentication failed!")
-        });
+    console.log(username);
+    console.log(pass);
+    let logged = false;
+    users.forEach((user) => {
+        if(username === user.username && pass === user.password) {
+            localStorage.setItem('userID', user.userID);
+            localStorage.setItem('username', user.username);
+            authInfo.style.zIndex = "1";
+            loginFrom.classList.add("form--hide");
+            authInfo.classList.add("authInfo--show");
+            chatWrapper.classList.remove("section--disabled");
+            logged = true;
+        }
+    });
+    if (!logged) {
+        alert("Authentication failed!");
+    }
 }
 
 function logout() {
-    fetch(`https://localhost:44310/api/account/logout`, {
-        method: "GET",
-        headers: {
-            "Content-Type": "application/json",
-        },
-    })
-        .then((data) => {
-            console.log(data);
-            localStorage.removeItem("userID");
-            localStorage.removeItem("username");
-            authInfo.style.zIndex = "-1";
-            loginFrom.classList.remove("form--hide");
-            authInfo.classList.remove("authInfo--show");
-        })
-        .catch((error) => {
-            console.error("Error:", error);
-        });
+    localStorage.removeItem("userID");
+    localStorage.removeItem("username");
+    authInfo.style.zIndex = "-1";
+    loginFrom.classList.remove("form--hide");
+    authInfo.classList.remove("authInfo--show");
+    chatWrapper.classList.add("section--disabled");
 }
 
 
 loginButton.addEventListener("click", function () {
     let usernameValue = usernameInput.value;
     let passwordValue = passwordInput.value;
-    console.log(usernameValue);
-    console.log(passwordValue);
     auth(usernameValue, passwordValue);
 });
 
@@ -21805,52 +21812,36 @@ utils.intFromLE = intFromLE;
 arguments[4][43][0].apply(exports,arguments)
 },{"buffer":47,"dup":43}],114:[function(require,module,exports){
 module.exports={
-  "_args": [
-    [
-      "elliptic@6.5.4",
-      "C:\\Users\\Dorota\\source\\repos\\DH-keys-distribution\\client"
-    ]
+  "name": "elliptic",
+  "version": "6.5.4",
+  "description": "EC cryptography",
+  "main": "lib/elliptic.js",
+  "files": [
+    "lib"
   ],
-  "_from": "elliptic@6.5.4",
-  "_id": "elliptic@6.5.4",
-  "_inBundle": false,
-  "_integrity": "sha512-iLhC6ULemrljPZb+QutR5TQGB+pdW6KGD5RSegS+8sorOZT+rdQFbsQFJgvN3eRqNALqJer4oQ16YvJHlU8hzQ==",
-  "_location": "/elliptic",
-  "_phantomChildren": {},
-  "_requested": {
-    "type": "version",
-    "registry": true,
-    "raw": "elliptic@6.5.4",
-    "name": "elliptic",
-    "escapedName": "elliptic",
-    "rawSpec": "6.5.4",
-    "saveSpec": null,
-    "fetchSpec": "6.5.4"
+  "scripts": {
+    "lint": "eslint lib test",
+    "lint:fix": "npm run lint -- --fix",
+    "unit": "istanbul test _mocha --reporter=spec test/index.js",
+    "test": "npm run lint && npm run unit",
+    "version": "grunt dist && git add dist/"
   },
-  "_requiredBy": [
-    "/browserify-sign",
-    "/create-ecdh"
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:indutny/elliptic"
+  },
+  "keywords": [
+    "EC",
+    "Elliptic",
+    "curve",
+    "Cryptography"
   ],
-  "_resolved": "https://registry.npmjs.org/elliptic/-/elliptic-6.5.4.tgz",
-  "_spec": "6.5.4",
-  "_where": "C:\\Users\\Dorota\\source\\repos\\DH-keys-distribution\\client",
-  "author": {
-    "name": "Fedor Indutny",
-    "email": "fedor@indutny.com"
-  },
+  "author": "Fedor Indutny <fedor@indutny.com>",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/indutny/elliptic/issues"
   },
-  "dependencies": {
-    "bn.js": "^4.11.9",
-    "brorand": "^1.1.0",
-    "hash.js": "^1.0.0",
-    "hmac-drbg": "^1.0.1",
-    "inherits": "^2.0.4",
-    "minimalistic-assert": "^1.0.1",
-    "minimalistic-crypto-utils": "^1.0.1"
-  },
-  "description": "EC cryptography",
+  "homepage": "https://github.com/indutny/elliptic",
   "devDependencies": {
     "brfs": "^2.0.2",
     "coveralls": "^3.1.0",
@@ -21866,31 +21857,15 @@ module.exports={
     "istanbul": "^0.4.5",
     "mocha": "^8.0.1"
   },
-  "files": [
-    "lib"
-  ],
-  "homepage": "https://github.com/indutny/elliptic",
-  "keywords": [
-    "EC",
-    "Elliptic",
-    "curve",
-    "Cryptography"
-  ],
-  "license": "MIT",
-  "main": "lib/elliptic.js",
-  "name": "elliptic",
-  "repository": {
-    "type": "git",
-    "url": "git+ssh://git@github.com/indutny/elliptic.git"
-  },
-  "scripts": {
-    "lint": "eslint lib test",
-    "lint:fix": "npm run lint -- --fix",
-    "test": "npm run lint && npm run unit",
-    "unit": "istanbul test _mocha --reporter=spec test/index.js",
-    "version": "grunt dist && git add dist/"
-  },
-  "version": "6.5.4"
+  "dependencies": {
+    "bn.js": "^4.11.9",
+    "brorand": "^1.1.0",
+    "hash.js": "^1.0.0",
+    "hmac-drbg": "^1.0.1",
+    "inherits": "^2.0.4",
+    "minimalistic-assert": "^1.0.1",
+    "minimalistic-crypto-utils": "^1.0.1"
+  }
 }
 
 },{}],115:[function(require,module,exports){

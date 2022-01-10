@@ -39,6 +39,7 @@ messageButton.addEventListener("click", function() {
     let messageValue = messageInput.value;
     const messageData = {
         UserID: localStorage.getItem('userID'),
+        UserName: localStorage.getItem('username'),
         message: messageValue
     };
     console.log(messageData);

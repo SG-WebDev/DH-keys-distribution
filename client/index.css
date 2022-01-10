@@ -28,6 +28,11 @@ body {
     align-items: center;
 }
 
+.section--disabled {
+    filter: blur(4px);
+    pointer-events: none;
+}
+
 .section--init {
     min-height: 100vh;
     --text-color: #fff;
