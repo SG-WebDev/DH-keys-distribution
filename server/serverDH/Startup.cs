@@ -6,8 +6,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using serverDH.Entities;
-using serverDH.Interfaces;
-using serverDH.Services;
 using System;
 
 namespace serverDH
@@ -31,14 +29,6 @@ namespace serverDH
                .EnableSensitiveDataLogging()
                .EnableDetailedErrors());
 
-            services.AddTransient<ISecretKey, SecretKey>();
-
-            services.AddIdentity<User, IdentityRole>(config =>
-            {
-                config.SignIn.RequireConfirmedEmail = false;
-                config.User.RequireUniqueEmail = false;
-            }).AddEntityFrameworkStores<AppDbContext>()
-               .AddDefaultTokenProviders();
                        
             services.AddCors(options =>
             {

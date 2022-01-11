@@ -1,10 +1,8 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
-using Microsoft.EntityFrameworkCore;
 using serverDH.Dtos;
 using serverDH.Entities;
-using serverDH.Interfaces;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -19,20 +17,18 @@ namespace serverDH.Controllers
         private readonly AppDbContext _dbContext;
         private readonly IMapper _mapper;
         private readonly IHubContext<MessageHubClient, IMessageHubClient> _messageHub;
-        public  ISecretKey _secretkey;
 
-        public ChatController(AppDbContext dbContext, IMapper mapper, IHubContext<MessageHubClient, IMessageHubClient> messageHub, ISecretKey secretKey)
+        public ChatController(AppDbContext dbContext, IMapper mapper, IHubContext<MessageHubClient, IMessageHubClient> messageHub)
         { 
             _dbContext = dbContext;
             _mapper = mapper;
             _messageHub = messageHub;
-            _secretkey = secretKey;
         }
 
         [HttpGet]
         public ActionResult<IEnumerable<MessageDto>> GetAll()
         {
-            var result = _dbContext.message.Include(x => x.User).ToList().OrderBy(messtime => messtime.date);
+            var result = _dbContext.message.ToList().OrderBy(messtime => messtime.date);
             var resultdto = _mapper.Map<List<MessageDto>>(result);
             
             return Ok(resultdto);
