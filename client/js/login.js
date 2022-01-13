@@ -5,14 +5,18 @@ const logoutButton = document.querySelector("#LogoutSubmit");
 const loginFrom = document.querySelector(".form");
 const authInfo = document.querySelector(".authInfo");
 const chatWrapper = document.querySelector("#ChatWrapper");
+var cipher = require('./cipher.js');
 
-const users = [
+
+var users = [
     {
         userID: 1,
         username: "Joe",
         password: "test1234",
         privateKey: "testPrivateKey",
         publicKey: "testPublicKey",
+        secret: "secret",
+        onlineStatus: false,
     },
     {
         userID: 2,
@@ -20,6 +24,8 @@ const users = [
         password: "test1234",
         privateKey: "testPrivateKey",
         publicKey: "testPublicKey",
+        secret: "secret",
+        onlineStatus: false,
     },
     {
         userID: 3,
@@ -27,6 +33,8 @@ const users = [
         password: "test1234",
         privateKey: "testPrivateKey",
         publicKey: "testPublicKey",
+        secret: "secret",
+        onlineStatus: false,
     },
     {
         userID: 4,
@@ -34,6 +42,8 @@ const users = [
         password: "test1234",
         privateKey: "testPrivateKey",
         publicKey: "testPublicKey",
+        secret: "secret",
+        onlineStatus: false,
     },
 ];
 
@@ -43,7 +53,8 @@ function auth(username, pass) {
     console.log(pass);
     let logged = false;
     users.forEach((user) => {
-        if(username === user.username && pass === user.password) {
+        if (username === user.username && pass === user.password) {
+            cipher.keyGenerator(user.username);                         //
             localStorage.setItem('userID', user.userID);
             localStorage.setItem('username', user.username);
             authInfo.style.zIndex = "1";
@@ -77,3 +88,28 @@ loginButton.addEventListener("click", function () {
 logoutButton.addEventListener("click", function () {
     logout();
 });
+
+function indexGeter(username) {                                             //
+    return (users.findIndex(x => x.username === username));
+}
+module.exports.indexGeter = indexGeter;
+
+function onlineGeter() {                                                    //
+    let num = users.length;
+    
+    return num;
+}
+module.exports.onlineGeter = onlineGeter;
+
+
+function userSetup(name) {                                //
+    let index = indexGeter(name);
+    users[index].onlineStatus = true;   
+}
+module.exports.userSetup = userSetup;
+
+function userGet() {                                //
+    return (users.find(x => x.onlineStatus === true));
+}
+module.exports.userGet = userGet;
+

@@ -1,4 +1,7 @@
 const signalR = require("@microsoft/signalr");
+var login = require('./login.js');
+var cipher = require('./cipher.js');
+
 
 const messageInput = document.querySelector("#MessageValue");
 const messageButton = document.querySelector("#MessageSubmit");
@@ -12,9 +15,23 @@ function getChat() {
         .then(response => response.json())
         .then(data => {
             console.log(data);
+            console.log("Raw message: " + data.at(-1).message);   //
             while (chatView.firstChild) {
                 chatView.removeChild(chatView.firstChild);
             }
+
+
+            let mess;
+            data.forEach((x) => {
+                try {
+                    mess = cipher.decrypt(x.message);
+                    x.message = mess;
+                } catch {
+                    x.message = x.message;
+                }
+            });
+           
+
             data.forEach(message => {
                 let messageClass;
                 if (message.userName === currentUsername) {
@@ -32,15 +49,17 @@ function getChat() {
                 chatView.scrollTop = chatView.scrollHeight;
             })
         });
-
 }
 
 messageButton.addEventListener("click", function() {
     let messageValue = messageInput.value;
+    let userr = login.userGet();
     const messageData = {
-        UserID: localStorage.getItem('userID'),
-        UserName: localStorage.getItem('username'),
-        message: messageValue
+        //UserID: localStorage.getItem('userID'),            //
+        //UserName: localStorage.getItem('username'),         //
+        UserID: userr.userID,
+        UserName: userr.username,
+        message: cipher.encrypt(messageValue),             //   
     };
     console.log(messageData);
     if(messageValue) {

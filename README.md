@@ -24,9 +24,9 @@ Prosty chat webowy z szyfrowaniem wiadomości z dystrybucją kluczy opartą o al
 
 #### Cezary Szpotek
 
-- [ ] Implementacja dystrybucji kluczy (DH) dla wielu userów
-- [ ] Implementacja sekretu do szyfru
-- [ ] Implementacja algorytmu szyfrowania (AES) wiadomości
+- [x] Implementacja dystrybucji kluczy (DH) dla wielu userów
+- [x] Implementacja sekretu do szyfru
+- [x] Implementacja algorytmu szyfrowania (AES) wiadomości
 
 #### Wszyscy
 
@@ -34,7 +34,17 @@ Prosty chat webowy z szyfrowaniem wiadomości z dystrybucją kluczy opartą o al
 
 ## Problematyka problemu
 
+Problematyka czatów grupowych i poufności informacji wymienianych przez użytkowników oscyluje między kilkoma ważnymi filarami, z których
+kompromitacja dowolnego może dopuścić do ujawnienia informacji wymienianych między użytkownikami.
+Głównymi filarami wymiany wiadomości w formie niejawnej end-to-end są:
+-wybór algorytmu szyfrowania między użytkownikami
+-wybór algorytmu wymiany kluczy między użytkownikami
+-implementacja ww. algorytmów
+-bezpieczne przechowywanie haseł do szyfru
+-bezpieczna dystrybucja kluczy
+
 ### Opis
+
 
 ### Znane rozwiązanie
 

@@ -1,91 +1,102 @@
 var crypto = require("crypto");
-var AES256 = "aes256";
+const algorithm = 'aes-256-cbc';
+var login = require('./login.js');
 
 
-var usr1 = crypto.createECDH("curve25519");
-var usr1Key = usr1.generateKeys();
+async function keyGenerator(username) {               //
+    console.log("Generowanie kluczy");
+    login.userSetup(username);
+    secretLoop();
+}
 
-var usr2 = crypto.createECDH("curve25519");
-var usr2Key = usr2.generateKeys();
+function encrypt(text) {        //
+    let iv = crypto.randomBytes(16);
+    console.log("Sekret: " + localStorage.getItem("secret"));
+    console.log("Klucz prywatny: " + localStorage.getItem("privateKey"));
+    let pk = localStorage.getItem("secret");
+    let passwd = pk.toString().substr(0, 32);
+    console.log("HASLO: " + passwd);
+    let cipher = crypto.createCipheriv(algorithm, Buffer.from(passwd), iv);
+    let encrypted = cipher.update(text);
 
-var usr3 = crypto.createECDH("curve25519");
-var usr3Key = usr3.generateKeys();
+    encrypted = Buffer.concat([encrypted, cipher.final()]);
 
-console.log(usr3Key);
-
-var Tempusr1Secret = usr1.computeSecret(usr2Key);   //1 z 2
-var Tempusr2Secret = usr2.computeSecret(usr3Key);   //2 z 3
-var Tempusr3Secret = usr3.computeSecret(usr1Key);   //3 z 1
-
-
-var usr1Secret = usr1.computeSecret(Tempusr2Secret);
-var usr2Secret = usr2.computeSecret(Tempusr3Secret);
-var usr3Secret = usr3.computeSecret(Tempusr1Secret);
-
-Tempusr1Secret = Tempusr1Secret.toString("hex");
-Tempusr2Secret = Tempusr2Secret.toString("hex");
-Tempusr3Secret = Tempusr3Secret.toString("hex");
-console.log("Temp 1:" + Tempusr1Secret);
-console.log("Temp 2:" + Tempusr2Secret);
-console.log("Temp 3:" + Tempusr3Secret);
-
-console.log("\n")
+    return iv.toString('hex') + ':' + encrypted.toString('hex');
+}
 
 
-console.log("User1 Public Key: " + usr1.getPublicKey("hex"));
-console.log("User1 Private Key: " + usr1.getPrivateKey("hex"));
+function decrypt(text) {            //
+    let textParts = text.split(':');
+    let iv = Buffer.from(textParts.shift(), 'hex');
+    let pk = localStorage.getItem("secret");
+    let passwd = pk.toString().substr(0, 32);
+    let encryptedText = Buffer.from(textParts.join(':'), 'hex');
+    let decipher = crypto.createDecipheriv(algorithm, Buffer.from(passwd), iv);
+    let decrypted = decipher.update(encryptedText);
 
-console.log("\n");
+    decrypted = Buffer.concat([decrypted, decipher.final()]);
 
-console.log("User2 Public Key: " + usr2.getPublicKey("hex"));
-console.log("User2 Private Key: " + usr2.getPrivateKey("hex"));
+    return decrypted.toString();
+}
 
-console.log("\n");
+function secretLoop() {
+    let n = login.onlineGeter();
+    var usr = [];
+    var userSecret = [];
+    var secretZero;
 
-console.log("User3 Public Key: " + usr3.getPublicKey("hex"));
-console.log("User3 Private Key: " + usr3.getPrivateKey("hex"));
 
-console.log("\n");
+    //Utworzenie n userow
+    for (var g = 0; g < n; g++) {
+        usr[g] = crypto.createECDH("curve25519");
+        usr[g].generateKeys();
+    }
 
-usr1Secret = usr1Secret.toString("hex");
-usr2Secret = usr2Secret.toString("hex");
-usr3Secret = usr3Secret.toString("hex");
+    //Console log po kluczach
+    for (var o = 0; o < n; o++) {
+        console.log("Klucz prywatny: " + usr[o].getPrivateKey().toString("hex"));
+        console.log("Klucz publiczny: " + usr[o].getPublicKey().toString("hex"));
+    }
 
-//Wyswietlenie sekretow
+    //Przeliczanie sekretow dla n userow
+    for (var i = 0; i < (n - 1); i++) {
+        for (var p = 0; p < n; p++) {
+            if (i == 0) {
+                if (p == (n - 1)) {
+                    userSecret[p] = (usr[p].computeSecret(usr[0].getPublicKey()));
+                }
+                else {
+                    userSecret[p] = (usr[p].computeSecret(usr[p + 1].getPublicKey()));
+                }
+            }
+            else {
+                if (p == (n - 1)) {
+                    userSecret[p] = (usr[p].computeSecret(secretZero))
+                }
+                else {
+                    if (p == 0) {
+                        secretZero = userSecret[p];
+                    }
+                    userSecret[p] = (usr[p].computeSecret(userSecret[p + 1]));
+                }
+            }
+        }
+    }
 
-console.log("User1 secret: " + usr1Secret);
-console.log("User2 secret: " + usr2Secret);
-console.log("User3 secret: " + usr3Secret);
+    userSecret.forEach(sekret => {
+        console.log(sekret.toString("hex"));
+    })
 
-console.log("\n");
+    localStorage.setItem('secret', userSecret[0].toString("hex"));
 
-//Szyfrowanie wiadomosci
+    console.log("\n")
 
-var usr1Cipher = crypto.createCipher(AES256, usr1Secret);
-//var usr1Decipher = crypto.createDecipher(AES256, usr1Secret);
 
-//var usr2Cipher = crypto.createCipher(AES256, usr2Secret);
-var usr2Decipher = crypto.createDecipher(AES256, usr2Secret);
 
-//var usr3Cipher = crypto.createCipher(AES256, usr3Secret);
-var usr3Decipher = crypto.createDecipher(AES256, usr3Secret);
+}
 
-var message1 = "Wsp�lna wiadomo�� od usera 1 do wszystkich";
-var encr_message1 = usr1Cipher.update(message1, "utf8", "hex");
-encr_message1 += usr1Cipher.final("hex");
-console.log("User1 says (clear): " + message1);
-console.log("User1 says (ciphered): " + encr_message1);
-
-console.log("\n");
-
-var decr_message1 = usr2Decipher.update(encr_message1, "hex", "utf8");
-decr_message1 += usr2Decipher.final("utf8");
-console.log("User2 receives (ciphered): " + encr_message1);
-console.log("User2 receives (deciphered): " + decr_message1);
-
-console.log("\n");
-
-var decr_message2 = usr3Decipher.update(encr_message1, "hex", "utf8");
-decr_message2 += usr3Decipher.final("utf8");
-console.log("User3 receives (ciphered): " + encr_message1);
-console.log("User3 receives (deciphered): " + decr_message2);
+module.exports = {
+    keyGenerator: keyGenerator,
+    decrypt: decrypt,
+    encrypt : encrypt,
+};
