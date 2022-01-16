@@ -30,7 +30,7 @@ Prosty chat webowy z szyfrowaniem wiadomości z dystrybucją kluczy opartą o al
 
 #### Wszyscy
 
-- [*] Napisanie dokumentacji projektowej
+- [x] Napisanie dokumentacji projektowej
 
 ## Problematyka problemu
 
